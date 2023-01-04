@@ -1,4 +1,4 @@
-const obj = {
+const object = {
   a: 1,
   b: {
     c: 2,
@@ -6,9 +6,13 @@ const obj = {
   },
   e: 4,
 };
-let newObj = {};
-const keys = Object.keys(obj);
-console.log("🚀 ~ file: obj.js:10 ~ keys", keys);
-const value = Object.values(obj);
-console.log("🚀 ~ file: obj.js:11 ~ value", value);
-
+let temp = {};
+const newObj = (obj) => {
+  Object.keys(obj).forEach((item) => {
+    typeof obj[item] === "object"
+      ? newObj(obj[item])
+      : (temp[item] = obj[item]);
+  });
+  return temp;
+};
+console.log("🚀 ~ file: obj.js:19 ~ newObj(obj);", newObj(object));
